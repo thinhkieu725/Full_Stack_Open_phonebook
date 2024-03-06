@@ -19,8 +19,36 @@ mongoose.connect(url)
   })
 
 const personSchema = new mongoose.Schema({
-  name: String,
-  number: String,
+  name: {
+    type: String,
+    minLength: 3,
+    required: true,
+  },
+  number: {
+    type: String, 
+    required: true,
+    validate: {
+      validator: function(number) {
+        if (number.length < 8) {
+          return false
+        }
+        const numberArray = number.split('-')
+        if (numberArray.length != 2) {
+          return false
+        }
+        if (numberArray[0].length > 3 || numberArray[0].length < 2) {
+          return false
+        }
+        numberArray.forEach(num => {
+          if (isNaN(Number(num))) {
+            return false
+          }
+        })
+        return true
+      },
+      message: props => `${props.value} is not a valid phone number!`
+    }
+  }
 })
 
 personSchema.set('toJSON', {
