@@ -1,14 +1,13 @@
 module.exports = {
 	'plugins': [
-        '@stylistic/js'
-    ],
-    'extends': 'eslint:recommended',
+		'@stylistic/js'
+	],
+	'extends': 'eslint:recommended',
 	'env': {
 		'node': true,
 		'commonjs': true,
 		'es2021': true
 	},
-	'extends': 'eslint:recommended',
 	'overrides': [
 		{
 			'env': {
